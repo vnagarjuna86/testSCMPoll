@@ -7,6 +7,7 @@ pipeline {
         // Checkout the repository
         //checkout scm
         git remote set-url origin git@github.com:vnagarjuna86/testSCMPoll.git
+        checkout scm
       }
     }
     
