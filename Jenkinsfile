@@ -9,11 +9,13 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'echo "Naga test'
+                    sh 'echo "Naga test"'
                 }
             }
         }
-         post {
+    }
+    
+    post {
         always {
             // Cleanup steps to be executed regardless of condition
             
@@ -30,6 +32,4 @@ pipeline {
     when {
         changeset "git"
     }
-}
-
 }
