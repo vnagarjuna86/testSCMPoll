@@ -24,9 +24,9 @@ pipeline {
                         cat file1
                         echo 'file1 content'
                         cp file1 file2
-                        '''
+                        ''' }
                     */
-                    }
+                    
                     
                 }
             }
