@@ -1,16 +1,18 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Checkout') {
-      steps {
-        // Checkout the repository
-        //checkout scm
-        git remote set-url origin git@github.com:vnagarjuna86/testSCMPoll.git
-        checkout scm
-      }
-    }
-    
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    sh 'echo "Naga test"'
+                }
+            }
+        }
     stage('Check Changes') {
       steps {
         script {
@@ -31,6 +33,7 @@ pipeline {
             echo 'changed'
         }
       }
+    }
     }
     
     stage('Build') {
