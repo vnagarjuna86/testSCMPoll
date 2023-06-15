@@ -27,9 +27,9 @@ pipeline {
             }
         }
     }
-    
-    // Condition to trigger the post section only when changes are made to a file
-    when {
-        changeset "git"
-    }
+}
+
+// Condition to trigger the post section only when changes are made to a file
+when {
+    changeset "git"
 }
