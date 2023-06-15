@@ -5,7 +5,8 @@ pipeline {
     stage('Checkout') {
       steps {
         // Checkout the repository
-        checkout scm
+        //checkout scm
+        git remote set-url origin git@github.com:vnagarjuna86/testSCMPoll.git
       }
     }
     
