@@ -1,46 +1,41 @@
 pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Build') {
-            steps {
-                script {
-                    sh 'echo "Naga test"'
-                }
-            }
-        }
-        stage('Check Changes') {
-            steps {
-                script {
-                    sh '''
-                    aws configure set AKIAWLOHXBGDSWDU5J6Q yv2cvdBw2fCely7LDGQjr
-                    aws s3 cp file1 s3://democf-naga-v1/
-                    cp file1 file2
-                    '''
-                    // Check for changes using the git step
-                    //def changes = checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vnagarjuna86/testSCMPoll.git']]])
-                    /*if (changes.polling && changes.polling.lastChangeset) {
-                        sh '''
-                        cat file1
-                        echo 'file1 content'
-                        cp file1 file2
-                        ''' }
-                    */
-                    
-                    
-                }
-            }
-        }
+  agent any
+  
+  stages {
+    stage('Checkout') {
+      steps {
+        // Checkout the repository
+        git 'https://github.com/vnagarjuna86/testSCMPoll.git'
+      }
     }
     
-    post {
-        always {
-            // Cleanup steps to be executed regardless of condition
-            echo 'cleanup'
+    stage('Check Changes') {
+      steps {
+        script {
+          def fileChanged = false
+          // Get the list of changed files between the current and previous commit
+          def changedFiles = sh(returnStdout: true, script: 'git diff --name-only HEAD^ HEAD').trim().split('\n')
+          
+          // Check if the specific file is in the list of changed files
+          if (changedFiles.contains('file1')) {
+            fileChanged = true
+          }
+          
+          // Abort the pipeline if the specific file is not modified
+          if (!fileChanged) {
+            error('No changes in the specific file. Aborting the build.')
+          }
         }
+      }
     }
+    
+    stage('Build') {
+      steps {
+        // Perform your build steps here
+        echo 'build'
+      }
+    }
+    
+    // Add more stages as needed
+  }
 }
