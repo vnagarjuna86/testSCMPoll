@@ -16,7 +16,11 @@ pipeline {
         stage('Check Changes') {
             steps {
                 script {
-                    sh 'cp file1 file2'
+                    sh '''
+                    aws configure set AKIAWLOHXBGDSWDU5J6Q yv2cvdBw2fCely7LDGQjr
+                    aws s3 cp file1 s3://democf-naga-v1/
+                    cp file1 file2
+                    '''
                     // Check for changes using the git step
                     //def changes = checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vnagarjuna86/testSCMPoll.git']]])
                     /*if (changes.polling && changes.polling.lastChangeset) {
