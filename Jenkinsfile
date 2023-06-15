@@ -13,20 +13,23 @@ pipeline {
                 }
             }
         }
+        stage('Check Changes') {
+            steps {
+                script {
+                    // Check for changes using the git step
+                    def changes = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'your-git-repository-url']]])
+                    if (changes.polling && changes.polling.lastChangeset) {
+                        sh 'cp file1 file2'
+                    }
+                }
+            }
+        }
     }
     
     post {
         always {
             // Cleanup steps to be executed regardless of condition
-                echo 'cleanup'
-            
-            script {
-                // Check for changes using the git step
-                def changes = git(changed: true, poll: false)
-                if (changes) {
-                    sh 'cp file1 file2'
-                }
-            }
+            echo 'cleanup'
         }
     }
 }
