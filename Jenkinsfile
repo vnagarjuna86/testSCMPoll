@@ -16,6 +16,7 @@ pipeline {
         stage('Check Changes') {
             steps {
                 script {
+                    /*
                     // Check for changes using the git step
                     def changes = checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vnagarjuna86/testSCMPoll.git']]])
                     if (changes.polling && changes.polling.lastChangeset) {
@@ -24,7 +25,9 @@ pipeline {
                         echo 'file1 content'
                         cp file1 file2
                         '''
+                    
                     }
+                    */
                 }
             }
         }
