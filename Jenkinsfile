@@ -18,6 +18,7 @@ pipeline {
     post {
         always {
             // Cleanup steps to be executed regardless of condition
+                echo 'cleanup'
             
             script {
                 // Check for changes using the git step
