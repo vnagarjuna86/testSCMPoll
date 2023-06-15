@@ -25,6 +25,8 @@ pipeline {
           if (!fileChanged) {
             error('No changes in the specific file. Aborting the build.')
           }
+          else
+            echo 'changed'
         }
       }
     }
