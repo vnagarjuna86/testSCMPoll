@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Check for changes using the git step
-                    def changes = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'your-git-repository-url']]])
+                    def changes = checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'your-git-repository-url']]])
                     if (changes.polling && changes.polling.lastChangeset) {
                         sh 'cp file1 file2'
                     }
