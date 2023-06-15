@@ -36,12 +36,5 @@ pipeline {
     }
     }
     
-    stage('last') {
-      steps {
-        // Perform your build steps here
-        echo 'build'
-      }
-    }
-    
     // Add more stages as needed
   }
