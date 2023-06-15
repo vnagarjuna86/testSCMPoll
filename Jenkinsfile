@@ -19,17 +19,13 @@ pipeline {
         always {
             // Cleanup steps to be executed regardless of condition
             
-            // Copy command if changes were made to a file
             script {
-                if (changeset) {
+                // Check for changes using the git step
+                def changes = git(changed: true, poll: false)
+                if (changes) {
                     sh 'cp file1 file2'
                 }
             }
         }
     }
-}
-
-// Condition to trigger the post section only when changes are made to a file
-when {
-    changeset "git"
 }
