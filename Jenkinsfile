@@ -36,7 +36,7 @@ pipeline {
     }
     }
     
-    stage('Build') {
+    stage('last') {
       steps {
         // Perform your build steps here
         echo 'build'
