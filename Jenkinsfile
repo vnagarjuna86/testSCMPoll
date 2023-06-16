@@ -25,7 +25,7 @@ pipeline {
             fileChanged = true
           }
           
-          // Abort the pipeline if the specific file is not modified
+          // Skip the pipeline if the specific file is not modified
           if (!fileChanged) {
             // error('No changes in the specific file. Aborting the build.')
               echo 'file not changed'
